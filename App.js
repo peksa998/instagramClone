@@ -7,6 +7,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import firebase from "firebase/app";
 
+import { Provider } from "react-redux";
+import { applyMiddleware, createStore } from "redux";
+import rootReducer from "./redux/reducers";
+import thunk from "redux-thunk";
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 const firebaseConfig = {
   apiKey: "AIzaSyAM15Kl7QRA-B-zqYeAPE321pmWV6uTdR0",
   authDomain: "instagramclone-5ba85.firebaseapp.com",
@@ -23,6 +30,7 @@ if (firebase.apps.length === 0) {
 
 import LandingScreen from "./components/auth/Landing";
 import LandingRegister from "./components/auth/Register";
+import MainScreen from "./components/Main";
 
 const Stack = createStackNavigator();
 
@@ -76,9 +84,9 @@ export class App extends Component {
       );
     }
     return (
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <Text>User is logged in!</Text>
-      </View>
+      <Provider store={store}>
+        <MainScreen />
+      </Provider>
     );
   }
 }
