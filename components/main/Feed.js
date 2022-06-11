@@ -20,13 +20,14 @@ function Feed(props) {
 
   useEffect(() => {
     let posts = [];
+    const { currentUser, following, usersLoaded, users } = props;
 
     //fetchUsersFollowingPosts(props.currentUser.uid);
-    console.log(props.currentUser);
+    console.log(currentUser);
     console.log({ posts });
     console.log("OVDE");
-    console.log(props.following.length);
-    console.log(props.usersLoaded);
+    console.log(following.length);
+    console.log(usersLoaded);
 
     // ovde je greska
     // ne prikazuje feed
@@ -53,8 +54,6 @@ function Feed(props) {
 
   return (
     <View style={styles.container}>
-      <Text>{props.following.length}</Text>
-
       <View style={styles.containerGallery}>
         <FlatList
           numColumns={1}
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
   },
 
   containerImage: {
-    flex: 1 / 3,
+    flex: 1,
   },
 
   Image: {
@@ -99,8 +98,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
   following: store.userState.following,
-  users: store.userState.users,
-  usersLoaded: store.userState.usersLoaded,
+  users: store.usersState.users,
+  usersLoaded: store.usersState.usersLoaded,
 });
 
 export default connect(mapStateToProps, null)(Feed);

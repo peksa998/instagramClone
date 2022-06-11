@@ -53,7 +53,6 @@ export function fetchUserPosts() {
           const id = doc.id;
           return { id, ...data };
         });
-        console.log(posts);
         dispatch({
           type: USER_POSTS_STATE_CHANGE,
           posts,
@@ -78,8 +77,6 @@ export function fetchUserFollowing() {
           type: USER_FOLLOWING_STATE_CHANGE,
           following,
         });
-        console.log("test ovde");
-        console.log(following.length);
         for (let i = 0; i < following.length; i++) {
           dispatch(fetchUsersData(following[i], true));
         }
@@ -131,7 +128,7 @@ export function fetchUsersFollowingPosts(uid) {
         // const uid = snapshot._.query.C_.path.segment[1];
         const uid = snapshot.docs[0].ref.path.split("/")[1];
         // const uid = snapshot.query.EP.path.segments[1];
-        console.log("test a");
+        console.log("uzima post od prijatelja");
         console.log({ snapshot, uid });
         const user = getState().usersState.users.find((el) => el.uid === uid);
 
